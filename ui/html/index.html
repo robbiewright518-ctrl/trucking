@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trucking System</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="app" class="app-container">
+        <div id="mainMenu" class="menu-screen active">
+            <div class="menu-header">
+                <h1>🚛 Trucking System</h1>
+                <p>Professional Trucking Management</p>
+            </div>
+            
+            <div class="player-stats">
+                <div class="stat-box">
+                    <span class="stat-label">Level</span>
+                    <span id="displayLevel" class="stat-value">1</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">XP Progress</span>
+                    <div class="xp-bar">
+                        <div id="xpProgress" class="xp-fill" style="width: 0%"></div>
+                    </div>
+                    <span id="xpText" class="stat-small">0 / 1000</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Earnings</span>
+                    <span id="totalEarnings" class="stat-value">$0</span>
+                </div>
+            </div>
+            
+            <div class="menu-buttons">
+                <button class="btn btn-primary" onclick="showJobSelection()">
+                    <span class="btn-icon">📋</span>
+                    <span>Available Jobs</span>
+                </button>
+                <button class="btn btn-primary" onclick="showStats()">
+                    <span class="btn-icon">📊</span>
+                    <span>Player Stats</span>
+                </button>
+                <button class="btn btn-primary" onclick="showLeaderboard()">
+                    <span class="btn-icon">🏆</span>
+                    <span>Leaderboard</span>
+                </button>
+                <button class="btn btn-primary" onclick="showAchievements()">
+                    <span class="btn-icon">🎖️</span>
+                    <span>Achievements</span>
+                </button>
+                <button class="btn btn-primary" onclick="showPerks()">
+                    <span class="btn-icon">✨</span>
+                    <span>Perks</span>
+                </button>
+                <button class="btn btn-warning" onclick="cancelJobUI()">
+                    <span class="btn-icon">🚫</span>
+                    <span>Cancel Current Job</span>
+                </button>
+                <button class="btn btn-danger" onclick="closeUI()">
+                    <span class="btn-icon">✕</span>
+                    <span>Close</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="dirtyMainMenu" class="menu-screen dirty-screen">
+            <div class="menu-header">
+                <h1>💀 Underground Network</h1>
+                <p>Dirty Money. No Questions Asked.</p>
+            </div>
+
+            <div class="dirty-warning">
+                ⚠️ All payments in <strong>BLACK MONEY / MARKED BILLS</strong>. Cops are watching.
+            </div>
+
+            <div class="criminal-stats">
+                <div class="crim-row">
+                    <span class="crim-label">Rank</span>
+                    <span id="crimRank" class="crim-value">Street Runner</span>
+                </div>
+                <div class="crim-row">
+                    <span class="crim-label">Criminal Level</span>
+                    <span id="crimLevel" class="crim-value">1</span>
+                </div>
+                <div class="crim-row">
+                    <span class="crim-label">Rep Progress</span>
+                    <div class="crim-bar"><div id="crimRepFill" class="crim-bar-fill" style="width: 0%"></div></div>
+                    <span id="crimRepText" class="crim-small">0 / 750</span>
+                </div>
+                <div class="crim-row">
+                    <span class="crim-label">Dirty Jobs Done</span>
+                    <span id="crimJobsDone" class="crim-value">0</span>
+                </div>
+            </div>
+
+            <div class="menu-buttons">
+                <button class="btn btn-danger" onclick="showDirtyJobs()">
+                    <span class="btn-icon">💀</span>
+                    <span>Dirty Job Listings</span>
+                </button>
+                <button class="btn btn-danger" onclick="showLeaderboard()">
+                    <span class="btn-icon">🏆</span>
+                    <span>Leaderboard</span>
+                </button>
+                <button class="btn btn-danger" onclick="showAchievements()">
+                    <span class="btn-icon">🎖️</span>
+                    <span>Achievements</span>
+                </button>
+                <button class="btn btn-danger" onclick="showPerks()">
+                    <span class="btn-icon">✨</span>
+                    <span>Perks</span>
+                </button>
+                <button class="btn btn-warning" onclick="cancelJobUI()">
+                    <span class="btn-icon">🚫</span>
+                    <span>Cancel Current Job</span>
+                </button>
+                <button class="btn btn-danger" onclick="closeUI()">
+                    <span class="btn-icon">✕</span>
+                    <span>Leave</span>
+                </button>
+            </div>
+        </div>
+
+        <div id="leaderboardScreen" class="menu-screen">
+            <div class="menu-header">
+                <h2>🏆 Top Truckers</h2>
+                <button class="btn-back" onclick="showMainMenu()">← Back</button>
+            </div>
+            
+            <div class="leaderboard-content">
+                <div class="leaderboard-tabs">
+                    <button class="tab-btn active" onclick="switchLeaderboardTab('xp')">By Level / XP</button>
+                    <button class="tab-btn" onclick="switchLeaderboardTab('jobs')">By Jobs Done</button>
+                    <button class="tab-btn" onclick="switchLeaderboardTab('money')">By Earnings</button>
+                    <button class="tab-btn" onclick="switchLeaderboardTab('distance')">By Distance</button>
+                </div>
+                <div class="leaderboard-list" id="leaderboardList">
+                    <p class="loading-text">Loading leaderboard...</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="perksScreen" class="menu-screen">
+            <div class="menu-header">
+                <h2>✨ Perks</h2>
+                <button class="btn-back" onclick="showMainMenu()">← Back</button>
+            </div>
+            <div class="perks-points" id="perksPoints">Points: 0 available</div>
+            <div id="perksList" class="perks-list">
+                <p class="loading-text">Loading perks...</p>
+            </div>
+        </div>
+
+        <div id="achievementsScreen" class="menu-screen">
+            <div class="menu-header">
+                <h2>🎖️ Achievements</h2>
+                <button class="btn-back" onclick="showMainMenu()">← Back</button>
+            </div>
+            <div id="achievementsList" class="achievements-list">
+                <p class="loading-text">Loading achievements...</p>
+            </div>
+        </div>
+
+        <div id="jobSelection" class="menu-screen">
+            <div class="menu-header">
+                <h2 id="jobSelectionTitle">📋 Legit Jobs</h2>
+                <button class="btn-back" onclick="showMainMenu()">← Back</button>
+            </div>
+
+            <div class="job-filter-bar">
+                <input id="jobSearch" type="text" placeholder="🔍 Search jobs..." oninput="renderJobList()" />
+                <select id="jobSort" onchange="renderJobList()">
+                    <option value="payHigh">Pay (high → low)</option>
+                    <option value="payLow">Pay (low → high)</option>
+                    <option value="xpHigh">XP (high → low)</option>
+                    <option value="nameAZ">Name (A → Z)</option>
+                </select>
+            </div>
+
+            <div id="jobList" class="job-list">
+            </div>
+        </div>
+
+        <div id="jobDetails" class="menu-screen">
+            <div class="menu-header">
+                <h2 id="jobName">Job Details</h2>
+                <button class="btn-back" onclick="showJobSelection()">← Back</button>
+            </div>
+            
+            <div class="job-details-content">
+                <div class="detail-section">
+                    <h3>Delivery Information</h3>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <label>Job Type:</label>
+                            <span id="detailJobType">-</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Base Pay:</label>
+                            <span id="detailBasePay">$0</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Distance Bonus:</label>
+                            <span id="detailDistanceBonus">+8%</span>
+                        </div>
+                        <div class="info-item">
+                            <label>XP Reward:</label>
+                            <span id="detailXPReward">0 XP</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-section">
+                    <h3>Requirements</h3>
+                    <ul id="detailRequirements" class="requirements-list">
+                    </ul>
+                </div>
+                
+                <div class="detail-section">
+                    <button class="btn btn-primary btn-large" onclick="acceptJob()">
+                        Accept Job & Get Truck
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="garage" class="menu-screen">
+            <div class="menu-header">
+                <h2>🚗 Vehicle Garage</h2>
+                <button class="btn-back" onclick="showMainMenu()">← Back</button>
+            </div>
+            
+            <div class="garage-content">
+                <div class="garage-section">
+                    <h3>Owned Vehicles</h3>
+                    <div id="ownedVehicles" class="vehicle-grid">
+                    </div>
+                </div>
+                
+                <div class="garage-section">
+                    <h3>Available for Purchase</h3>
+                    <div id="purchasableVehicles" class="vehicle-grid">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="statsScreen" class="menu-screen">
+            <div class="menu-header">
+                <h2>📊 Player Statistics</h2>
+                <button class="btn-back" onclick="showMainMenu()">← Back</button>
+            </div>
+            
+            <div class="stats-content">
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <h3>Level</h3>
+                        <p class="stat-big" id="statLevel">1</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total XP</h3>
+                        <p class="stat-big" id="statTotalXP">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Jobs Completed</h3>
+                        <p class="stat-big" id="statJobsCompleted">0</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Distance Traveled</h3>
+                        <p class="stat-big" id="statDistance">0 km</p>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Total Earnings</h3>
+                        <p class="stat-big" id="statTotalEarnings">$0</p>
+                    </div>
+                </div>
+                
+                <div class="skills-section">
+                    <h3>Skills</h3>
+                    <div class="skill-item">
+                        <label>Distance Driving</label>
+                        <div class="skill-bar">
+                            <div id="skillDistanceDriving" class="skill-fill" style="width: 0%"></div>
+                        </div>
+                        <span id="skillDistanceDrivingText">0</span>
+                    </div>
+                    <div class="skill-item">
+                        <label>Fragile Handling</label>
+                        <div class="skill-bar">
+                            <div id="skillFragileHandling" class="skill-fill" style="width: 0%"></div>
+                        </div>
+                        <span id="skillFragileHandlingText">0</span>
+                    </div>
+                    <div class="skill-item">
+                        <label>Speed Efficiency</label>
+                        <div class="skill-bar">
+                            <div id="skillSpeedEfficiency" class="skill-fill" style="width: 0%"></div>
+                        </div>
+                        <span id="skillSpeedEfficiencyText">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="truckingHUD" class="trucking-hud hidden">
+        <div class="thud-row thud-title">🚛 <span id="thudJobName">Delivery</span></div>
+        <div class="thud-row"><span class="thud-label">Pay</span><span id="thudPay">$0</span></div>
+        <div class="thud-row"><span class="thud-label">XP</span><span id="thudXP">0</span></div>
+        <div class="thud-bar">
+            <span class="thud-label">Fuel</span>
+            <div class="thud-meter"><div id="thudFuel" class="thud-meter-fill fuel"></div></div>
+        </div>
+        <div class="thud-bar">
+            <span class="thud-label">Eng.</span>
+            <div class="thud-meter"><div id="thudEngine" class="thud-meter-fill engine"></div></div>
+        </div>
+        <div class="thud-row thud-trailer"><span id="thudTrailer">Trailer: —</span></div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>

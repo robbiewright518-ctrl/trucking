@@ -1,0 +1,142 @@
+{
+  "en": {
+    "commands": {
+      "trucking": "Open the trucking management menu"
+    },
+    "ui": {
+      "title": "Trucking System",
+      "subtitle": "Professional Trucking Management",
+      "level": "Level",
+      "xp_progress": "XP Progress",
+      "earnings": "Total Earnings",
+      "available_jobs": "Available Jobs",
+      "vehicle_garage": "Vehicle Garage",
+      "player_stats": "Player Statistics",
+      "close": "Close"
+    },
+    "jobs": {
+      "local_delivery": {
+        "name": "Local Delivery",
+        "description": "Short distance deliveries in the city"
+      },
+      "long_haul": {
+        "name": "Long Haul",
+        "description": "Cross-state deliveries"
+      },
+      "fragile_cargo": {
+        "name": "Fragile Cargo",
+        "description": "Delicate items - minimal damage allowed"
+      },
+      "timed_delivery": {
+        "name": "Timed Delivery",
+        "description": "Rush delivery with time limit"
+      }
+    },
+    "notifications": {
+      "job_accepted": "Job accepted! Drive to the depot.",
+      "job_started": "Delivery started! Drive to your destination.",
+      "job_completed": "Job completed!",
+      "job_failed": "Job failed:",
+      "job_cancelled": "Job cancelled",
+      "trailer_attached": "Trailer attached!",
+      "trailer_detached": "Trailer detached",
+      "no_trailer": "You must attach a trailer first",
+      "no_truck": "No truck found",
+      "out_of_fuel": "CRITICAL: Out of fuel!",
+      "engine_critical": "Engine critical! Vehicle may break down.",
+      "invalid_location": "You must be at the destination!",
+      "vehicle_too_damaged": "Vehicle too damaged for this job!"
+    },
+    "stats": {
+      "level": "Level",
+      "xp": "Total XP",
+      "jobs_completed": "Jobs Completed",
+      "distance_traveled": "Distance Traveled",
+      "total_earnings": "Total Earnings",
+      "skills": "Skills",
+      "distance_driving": "Distance Driving",
+      "fragile_handling": "Fragile Handling",
+      "speed_efficiency": "Speed Efficiency"
+    },
+    "vehicles": {
+      "fuel": "Fuel",
+      "engine": "Engine",
+      "damage": "Damage",
+      "destination": "Destination",
+      "distance": "Distance",
+      "trailer": "Trailer",
+      "attached": "Attached",
+      "detached": "Detached"
+    }
+  },
+  "es": {
+    "commands": {
+      "trucking": "Abrir menú de gestión de camiones"
+    },
+    "ui": {
+      "title": "Sistema de Camiones",
+      "subtitle": "Gestión Profesional de Camiones",
+      "level": "Nivel",
+      "xp_progress": "Progreso de XP",
+      "earnings": "Ganancias Totales",
+      "available_jobs": "Trabajos Disponibles",
+      "vehicle_garage": "Garaje de Vehículos",
+      "player_stats": "Estadísticas del Jugador",
+      "close": "Cerrar"
+    },
+    "jobs": {
+      "local_delivery": {
+        "name": "Entrega Local",
+        "description": "Entregas de corta distancia en la ciudad"
+      },
+      "long_haul": {
+        "name": "Larga Distancia",
+        "description": "Entregas entre estados"
+      },
+      "fragile_cargo": {
+        "name": "Carga Frágil",
+        "description": "Artículos delicados - daño mínimo permitido"
+      },
+      "timed_delivery": {
+        "name": "Entrega Urgente",
+        "description": "Entrega rápida con límite de tiempo"
+      }
+    },
+    "notifications": {
+      "job_accepted": "¡Trabajo aceptado! Dirígete al depósito.",
+      "job_started": "¡Entrega iniciada! Dirígete a tu destino.",
+      "job_completed": "¡Trabajo completado!",
+      "job_failed": "Trabajo fallido:",
+      "job_cancelled": "Trabajo cancelado",
+      "trailer_attached": "¡Remolque acoplado!",
+      "trailer_detached": "Remolque desacoplado",
+      "no_trailer": "Debes acoplar un remolque primero",
+      "no_truck": "Camión no encontrado",
+      "out_of_fuel": "CRÍTICO: ¡Sin combustible!",
+      "engine_critical": "¡Motor crítico! El vehículo puede romperse.",
+      "invalid_location": "¡Debes estar en el destino!",
+      "vehicle_too_damaged": "¡Vehículo muy dañado para este trabajo!"
+    },
+    "stats": {
+      "level": "Nivel",
+      "xp": "XP Total",
+      "jobs_completed": "Trabajos Completados",
+      "distance_traveled": "Distancia Recorrida",
+      "total_earnings": "Ganancias Totales",
+      "skills": "Habilidades",
+      "distance_driving": "Conducción de Distancia",
+      "fragile_handling": "Manipulación Frágil",
+      "speed_efficiency": "Eficiencia de Velocidad"
+    },
+    "vehicles": {
+      "fuel": "Combustible",
+      "engine": "Motor",
+      "damage": "Daño",
+      "destination": "Destino",
+      "distance": "Distancia",
+      "trailer": "Remolque",
+      "attached": "Acoplado",
+      "detached": "Desacoplado"
+    }
+  }
+}

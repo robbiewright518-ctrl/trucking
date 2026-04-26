@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trucking System - UI Preview</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #00a8ff;
+            --secondary-color: #ff6b6b;
+            --success-color: #51cf66;
+            --warning-color: #ffd43b;
+            --danger-color: #ff6b6b;
+            --dark-bg: #0f0f0f;
+            --card-bg: #1a1a1a;
+            --border-color: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0b0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+
+        .menu-screen {
+            width: 100%;
+            background: linear-gradient(135deg, var(--card-bg) 0%, #252525 100%);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+        }
+
+        .menu-header {
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .menu-header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(135deg, var(--primary-color), #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .menu-header p {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+        }
+
+        .player-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .stat-box {
+            background: rgba(0, 168, 255, 0.1);
+            border: 1px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .stat-label {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .stat-value {
+            display: block;
+            font-size: 1.8em;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+
+        .xp-bar {
+            width: 100%;
+            height: 8px;
+            background: #2a2a2a;
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+
+        .xp-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), #00d4ff);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .stat-small {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 0.8em;
+        }
+
+        .menu-buttons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), #0088cc);
+            color: #000;
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 168, 255, 0.3);
+        }
+
+        .btn-icon {
+            font-size: 1.3em;
+        }
+
+        .job-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .job-card {
+            background: rgba(0, 168, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .job-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 168, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .job-card:hover::before {
+            left: 100%;
+        }
+
+        .job-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 168, 255, 0.2);
+        }
+
+        .job-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .job-info {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .job-payment {
+            color: var(--success-color);
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .vehicle-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 15px;
+        }
+
+        .vehicle-card {
+            background: rgba(0, 168, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .vehicle-card:hover {
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 168, 255, 0.2);
+        }
+
+        .vehicle-name {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .vehicle-spec {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .vehicle-price {
+            color: var(--warning-color);
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .stat-card {
+            background: rgba(0, 168, 255, 0.05);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 15px;
+        }
+
+        .stat-card-label {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+
+        .stat-card-value {
+            color: var(--primary-color);
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .skill-bar {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+
+        .skill-label {
+            color: var(--text-secondary);
+            font-size: 0.85em;
+            margin-bottom: 5px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .skill-track {
+            width: 100%;
+            height: 10px;
+            background: #2a2a2a;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary-color), #00d4ff);
+            border-radius: 5px;
+        }
+
+        .hud-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 350px;
+            background: rgba(26, 26, 26, 0.95);
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+        }
+
+        .hud-title {
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-bottom: 10px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
+        }
+
+        .hud-item {
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .hud-status-bar {
+            margin-top: 8px;
+            height: 6px;
+            background: #2a2a2a;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .hud-status-fill {
+            height: 100%;
+            background: var(--success-color);
+            border-radius: 3px;
+        }
+
+        .hud-status-fill.warning {
+            background: var(--warning-color);
+        }
+
+        .hud-status-fill.danger {
+            background: var(--danger-color);
+        }
+
+        @media (max-width: 768px) {
+            .menu-screen {
+                padding: 20px;
+            }
+
+            .menu-header h1 {
+                font-size: 1.8em;
+            }
+
+            .hud-container {
+                width: 90%;
+                right: 5%;
+                left: 5%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="menu-screen">
+            <div class="menu-header">
+                <div>
+                    <h1>🚛 Trucking System</h1>
+                    <p>Professional Trucking Management</p>
+                </div>
+            </div>
+
+            <div class="player-stats">
+                <div class="stat-box">
+                    <span class="stat-label">Level</span>
+                    <span class="stat-value">15</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">XP Progress</span>
+                    <div class="xp-bar">
+                        <div class="xp-fill" style="width: 65%"></div>
+                    </div>
+                    <span class="stat-small">6500 / 10000</span>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Earnings</span>
+                    <span class="stat-value">$125,450</span>
+                </div>
+            </div>
+
+            <div class="menu-buttons">
+                <button class="btn btn-primary">
+                    <span class="btn-icon">📋</span>
+                    <span>Available Jobs</span>
+                </button>
+                <button class="btn btn-primary">
+                    <span class="btn-icon">🚗</span>
+                    <span>Vehicle Garage</span>
+                </button>
+                <button class="btn btn-primary">
+                    <span class="btn-icon">📊</span>
+                    <span>Player Stats</span>
+                </button>
+            </div>
+        </div>
+
+        <h2>📋 Available Jobs</h2>
+        <div class="menu-screen">
+            <div class="job-list">
+                <div class="job-card">
+                    <div class="job-title">Local Delivery</div>
+                    <div class="job-info">📍 Distance: 12.5 km</div>
+                    <div class="job-info">⏱️ Time: ~15 min</div>
+                    <div class="job-info">📦 Small cargo</div>
+                    <div class="job-payment">💰 $850</div>
+                </div>
+                <div class="job-card">
+                    <div class="job-title">Long Haul</div>
+                    <div class="job-info">📍 Distance: 45.2 km</div>
+                    <div class="job-info">⏱️ Time: ~50 min</div>
+                    <div class="job-info">📦 Large cargo</div>
+                    <div class="job-payment">💰 $3,200</div>
+                </div>
+                <div class="job-card">
+                    <div class="job-title">Fragile Cargo</div>
+                    <div class="job-info">📍 Distance: 18.3 km</div>
+                    <div class="job-info">⏱️ Time: ~25 min</div>
+                    <div class="job-info">⚠️ Requires care</div>
+                    <div class="job-payment">💰 $1,500</div>
+                </div>
+                <div class="job-card">
+                    <div class="job-title">Timed Delivery</div>
+                    <div class="job-info">📍 Distance: 8.7 km</div>
+                    <div class="job-info">⏱️ Time: ~12 min</div>
+                    <div class="job-info">⚡ Must hurry</div>
+                    <div class="job-payment">💰 $1,200</div>
+                </div>
+            </div>
+        </div>
+
+        <h2>🚗 Vehicle Garage</h2>
+        <div class="menu-screen">
+            <h3 style="color: var(--primary-color); margin-bottom: 15px;">Company Vehicles (Free)</h3>
+            <div class="vehicle-grid">
+                <div class="vehicle-card">
+                    <div class="vehicle-name">Mule (Company)</div>
+                    <div class="vehicle-spec">Payload: 5 tons</div>
+                    <div class="vehicle-spec">Condition: Perfect</div>
+                    <button class="btn btn-primary" style="margin-top: 10px; width: 100%;">
+                        <span>🚙 Spawn</span>
+                    </button>
+                </div>
+                <div class="vehicle-card">
+                    <div class="vehicle-name">Phantom (Company)</div>
+                    <div class="vehicle-spec">Payload: 8 tons</div>
+                    <div class="vehicle-spec">Condition: Perfect</div>
+                    <button class="btn btn-primary" style="margin-top: 10px; width: 100%;">
+                        <span>🚙 Spawn</span>
+                    </button>
+                </div>
+            </div>
+
+            <h3 style="color: var(--warning-color); margin-top: 30px; margin-bottom: 15px;">Purchasable Vehicles</h3>
+            <div class="vehicle-grid">
+                <div class="vehicle-card">
+                    <div class="vehicle-name">Baller</div>
+                    <div class="vehicle-spec">Payload: 6 tons</div>
+                    <div class="vehicle-spec">Fuel: 65 L</div>
+                    <div class="vehicle-price">💰 $45,000</div>
+                    <button class="btn btn-primary" style="margin-top: 10px; width: 100%;">
+                        <span>💳 Purchase</span>
+                    </button>
+                </div>
+                <div class="vehicle-card">
+                    <div class="vehicle-name">Hauler</div>
+                    <div class="vehicle-spec">Payload: 10 tons</div>
+                    <div class="vehicle-spec">Fuel: 80 L</div>
+                    <div class="vehicle-price">💰 $65,000</div>
+                    <button class="btn btn-primary" style="margin-top: 10px; width: 100%;">
+                        <span>💳 Purchase</span>
+                    </button>
+                </div>
+                <div class="vehicle-card">
+                    <div class="vehicle-name">Rubble Truck</div>
+                    <div class="vehicle-spec">Payload: 12 tons</div>
+                    <div class="vehicle-spec">Fuel: 100 L</div>
+                    <div class="vehicle-price">💰 $85,000</div>
+                    <button class="btn btn-primary" style="margin-top: 10px; width: 100%;">
+                        <span>💳 Purchase</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <h2>📊 Player Statistics</h2>
+        <div class="menu-screen">
+            <div class="stats-section">
+                <div class="stat-card">
+                    <div class="stat-card-label">CURRENT LEVEL</div>
+                    <div class="stat-card-value">15</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">TOTAL XP</div>
+                    <div class="stat-card-value">156,500</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">JOBS COMPLETED</div>
+                    <div class="stat-card-value">87</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">DISTANCE TRAVELED</div>
+                    <div class="stat-card-value">1,234 km</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">MONEY EARNED</div>
+                    <div class="stat-card-value">$125,450</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-card-label">FAVORITE JOB</div>
+                    <div class="stat-card-value">Long Haul</div>
+                </div>
+            </div>
+
+            <h3 style="color: var(--primary-color); margin-top: 30px; margin-bottom: 20px;">Skill Progression</h3>
+            <div class="stats-section">
+                <div class="skill-bar">
+                    <div class="skill-label">
+                        <span>Driving Skill</span>
+                        <span>Level 8</span>
+                    </div>
+                    <div class="skill-track">
+                        <div class="skill-progress" style="width: 75%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-label">
+                        <span>Cargo Handling</span>
+                        <span>Level 12</span>
+                    </div>
+                    <div class="skill-track">
+                        <div class="skill-progress" style="width: 92%"></div>
+                    </div>
+                </div>
+                <div class="skill-bar">
+                    <div class="skill-label">
+                        <span>Time Management</span>
+                        <span>Level 6</span>
+                    </div>
+                    <div class="skill-track">
+                        <div class="skill-progress" style="width: 58%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <h2 style="margin-bottom: 300px;">⚙️ In-Game HUD (During Job)</h2>
+        <div class="hud-container">
+            <div class="hud-title">🚛 ACTIVE DELIVERY</div>
+            
+            <div class="hud-item">
+                <span>Job Type:</span>
+                <span style="color: var(--primary-color);">Long Haul</span>
+            </div>
+            
+            <div class="hud-item">
+                <span>Destination:</span>
+                <span style="color: var(--primary-color);">Port Authority</span>
+            </div>
+            
+            <div class="hud-item">
+                <span>Distance:</span>
+                <span style="color: var(--primary-color);">32.4 km</span>
+            </div>
+
+            <hr style="border: none; border-top: 1px solid var(--border-color); margin: 10px 0;">
+
+            <div class="hud-item">
+                <span>Fuel Level:</span>
+                <span style="color: var(--success-color);">85%</span>
+            </div>
+            <div class="hud-status-bar">
+                <div class="hud-status-fill" style="width: 85%"></div>
+            </div>
+
+            <div class="hud-item" style="margin-top: 10px;">
+                <span>Engine Health:</span>
+                <span style="color: var(--success-color);">92%</span>
+            </div>
+            <div class="hud-status-bar">
+                <div class="hud-status-fill" style="width: 92%"></div>
+            </div>
+
+            <div class="hud-item" style="margin-top: 10px;">
+                <span>Vehicle Damage:</span>
+                <span style="color: var(--warning-color);">15%</span>
+            </div>
+            <div class="hud-status-bar">
+                <div class="hud-status-fill warning" style="width: 15%"></div>
+            </div>
+
+            <div class="hud-item" style="margin-top: 10px;">
+                <span>Trailer Status:</span>
+                <span style="color: var(--success-color);">Attached</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
